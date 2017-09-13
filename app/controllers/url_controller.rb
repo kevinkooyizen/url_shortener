@@ -11,4 +11,8 @@ class UrlController < ApplicationController
 		# 	@url = Url.find(url_id)
 		# end
 	end
+
+	def new
+		@url = Url.new
+	end
 end
