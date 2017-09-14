@@ -35,6 +35,11 @@ class UrlController < ApplicationController
 		redirect_to url_index_path
 	end
 
+	def short
+		url = Url.find(params[:id])
+		redirect_to url.long_url
+	end
+
 	private
 
 	def url_params
