@@ -1,4 +1,21 @@
 class UrlController < ApplicationController
+	
+
+
+	def create
+		@url = Url.new(url_params)
+		@url.shorten
+		if @url.save
+			redirect_to @url
+		else
+			render 'new'
+		end
+	end
+
+	def new
+		@url = Url.new
+	end
+
 	def index
 		@urls = Url.all
 	end
@@ -12,7 +29,15 @@ class UrlController < ApplicationController
 		# end
 	end
 
-	def new
-		@url = Url.new
+	def destroy
+		@url = Url.find(params[:id])
+		@url.destroy
+		redirect_to url_index_path
+	end
+
+	private
+
+	def url_params
+		params.require(:url).permit(:long_url)
 	end
 end
